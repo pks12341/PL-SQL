@@ -429,22 +429,23 @@ END;
 /* 
 
 1. 다음과 같이 출력되도록 하시오.
-*
-**
-***
-****
-*****
-*/
+* 첫번째줄 * 1개
+**     *2개
+***    ..
+****   ..
+*****    *5개
+*/ --기본 Loop
 DECLARE
-    v_star varchar(100) := ''; 
-    v_num NUMBER(2,0) := 0;        
+    v_star varchar2(6 char) := ''; 
+    v_line NUMBER(1,0) := 0;        
 BEGIN
     LOOP
             
          v_star := v_star || '*' ;
-         v_num := v_num + 1;
-        DBMS_OUTPUT.PUT_LINE(v_star);
-         EXIT WHEN v_num > 4;
+         DBMS_OUTPUT.PUT_LINE(v_star);
+        
+         v_line := v_line + 1;
+         EXIT WHEN v_line > 4;
          
     END LOOP;
    
@@ -452,6 +453,75 @@ END;
 /
 
 
+--while LOOP
 
+DECLARE
+    v_star varchar2(6 char) := ''; 
+    v_line NUMBER(2,0) := 0;        
+BEGIN
+    while  v_line <= 4 LOOP --while length(v_star) <=4 Loop 이렇게해도됨(v_line은 빼고)
+        
+        DBMS_OUTPUT.PUT_LINE(v_star);
+         v_star := v_star || '*' ;
+         v_line := v_line + 1;
+        
+           
+    END LOOP;
+   
+END;
+/
+
+--for LOOP
+DECLARE
+    v_star varchar2(6 char) := ''; 
+  
+BEGIN
+    FOR num IN 1..5 LOOP --declare절에 선언x//  reverse안하고 10..1하면 안돌아감 // FOR과  IN 사이에 있는 변수는 readonly(값을 변경할수 없음)
+         v_star := v_star || '*' ;
+       -- v_line := v_line + 1;      
+        DBMS_OUTPUT.PUT_LINE(v_star); -- 최종 결과를 출력하면 END 밑에 적고
+        
+    END LOOP;
+        
+END;
+/
+
+    --이중반복문 => PUT, PUT_LINE 사용
+    
+DECLARE
+       v_star varchar2(6 char) := ''; 
+      
+BEGIN
+    FOR line IN 1..5 LOOP -- 줄 제어
+        FOR star IN 1..line LOOP -- 별 제어
+      
+         DBMS_OUTPUT.PUT('*');
+         
+         END LOOP;
+         DBMS_OUTPUT.PUT_LINE('');
+    END LOOP;
+END;
+    /
+    
+    --=================
+DECLARE
+    v_line number(1,0):= 1;
+       v_star number(1,0) := 1; 
+      
+BEGIN
+    LOOP
+    v_star :=1;
+    LOOP
+        DBMS_OUTPUT.PUT('*');
+        v_star := v_star +1;
+        EXIT WHEN v_star > v_line;
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('');
+    v_line := v_line +1;
+    EXIT WHEN v_line > 5;
+ END LOOP;
+END;
+/
+        
 
 
