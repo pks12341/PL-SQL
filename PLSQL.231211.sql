@@ -234,7 +234,7 @@ BEGIN
 END;
 /
 
-SELECT employee_id, TRUNC(YEARS_BETWEEN(sysdate, hire_date)/12),
+SELECT employee_id, TRUNC(MONTHS_BETWEEN(sysdate, hire_date)/12),
                             TRUNC((sysdate-hire_date)/365)
 from employees
 order by 2 desc;
@@ -421,8 +421,7 @@ BEGIN
         v_sum := v_sum + num;
     END LOOP;
         DBMS_OUTPUT.PUT_LINE(v_sum);
-        
-
+     
 END;
 /
 
